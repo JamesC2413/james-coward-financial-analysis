@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="James Coward's financial analysis of Bloom Energy relative to SPY.">
+    <title>James Coward | Financial Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="calculations.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Financial Analysis home">
+        <span class="brand-mark">JC</span>
+        <span>James Coward<br><small>Financial Analysis</small></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#home" data-route="home">Home</a>
+        <a href="#about" data-route="about">About</a>
+        <a href="#analysis" data-route="analysis">Financial Analysis</a>
+        <a href="#contact" data-route="contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero" data-panel="home">
+        <div>
+          <p class="eyebrow">ENTREPRENEURIAL FINANCE PROJECT</p>
+          <h1>Measure return.<br><span>Understand risk.</span></h1>
+          <p class="lead">An interactive analysis of Bloom Energy Corporation (BE), using SPY as the market benchmark from 2023 through 2025.</p>
+          <div class="actions">
+            <a class="button primary" href="#analysis">View the analysis</a>
+            <a class="button secondary" href="#about">About the project</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Analysis overview">
+          <p>SECURITY</p>
+          <strong>BE</strong>
+          <span>Bloom Energy Corporation</span>
+          <hr>
+          <dl>
+            <div><dt>Benchmark</dt><dd>SPY</dd></div>
+            <div><dt>Frequency</dt><dd>Daily</dd></div>
+            <div><dt>Measures</dt><dd>5</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="panel content-panel" data-panel="about" hidden>
+        <p class="eyebrow">ABOUT</p>
+        <h1>About this project</h1>
+        <div class="two-column">
+          <div>
+            <p class="lead">My name is James Coward, and I created this website for an Entrepreneurial Finance project at Rogers State University.</p>
+            <p>The project demonstrates how historical adjusted closing prices can be converted into understandable measures of investment return and risk. Bloom Energy is the selected security, while SPY represents the broader market for comparison.</p>
+          </div>
+          <div class="info-card">
+            <h2>Project purpose</h2>
+            <ul>
+              <li>Calculate financial measures correctly</li>
+              <li>Explain each result in plain language</li>
+              <li>Provide a transparent, repeatable method</li>
+              <li>Demonstrate responsible use of AI in development</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel content-panel" data-panel="analysis" hidden>
+        <p class="eyebrow">FINANCIAL ANALYSIS</p>
+        <h1>Bloom Energy performance</h1>
+        <p class="lead">Choose a date range, then calculate BE's return and risk relative to SPY.</p>
+
+        <div class="analysis-controls">
+          <label>Beginning date<input id="start-date" type="date" value="2023-01-03"></label>
+          <label>Ending date<input id="end-date" type="date" value="2025-12-31"></label>
+          <button class="button primary" id="calculate-button" type="button">Calculate results</button>
+        </div>
+
+        <div id="data-status" class="status" role="status" aria-live="polite">Loading market data…</div>
+
+        <section id="results" hidden aria-labelledby="results-title">
+          <div class="results-heading">
+            <div><p class="eyebrow">RESULTS</p><h2 id="results-title">Financial measures</h2></div>
+            <p id="calculation-note"></p>
+          </div>
+          <div class="metric-grid">
+            <article class="metric"><span>Holding-period return</span><strong id="hpr-value">—</strong><p>Total BE return over the selected period.</p></article>
+            <article class="metric"><span>Annualized return</span><strong id="annual-value">—</strong><p>Compounded BE return expressed per year.</p></article>
+            <article class="metric"><span>Annualized volatility</span><strong id="volatility-value">—</strong><p>Daily return variability scaled by √252.</p></article>
+            <article class="metric"><span>Beta relative to SPY</span><strong id="beta-value">—</strong><p>BE's sensitivity to SPY's daily returns.</p></article>
+            <article class="metric"><span>Excess return</span><strong id="excess-value">—</strong><p>BE holding-period return minus SPY's.</p></article>
+            <article class="metric benchmark"><span>SPY benchmark return</span><strong id="benchmark-value">—</strong><p>Market comparison shown for transparency.</p></article>
+          </div>
+          <div class="interpretation"><h3>Interpretation</h3><p id="analysis-summary"></p></div>
+        </section>
+
+        <details class="methodology">
+          <summary>Methodology and formulas</summary>
+          <div class="formula-grid">
+            <p><strong>Holding-period return</strong><br>(Ending adjusted close ÷ Beginning adjusted close) − 1</p>
+            <p><strong>Annualized return</strong><br>(Ending price ÷ Beginning price)<sup>365.2425 ÷ elapsed days</sup> − 1</p>
+            <p><strong>Annualized volatility</strong><br>Sample standard deviation of daily returns × √252</p>
+            <p><strong>Beta</strong><br>Covariance(BE returns, SPY returns) ÷ Variance(SPY returns)</p>
+            <p><strong>Excess return</strong><br>BE holding-period return − SPY holding-period return</p>
+          </div>
+        </details>
+
+        <details class="methodology">
+          <summary>Use a different verified dataset</summary>
+          <p>Upload a CSV with the exact column headings <code>Date,BE,SPY</code>. Dates must use the YYYY-MM-DD format, and prices must be positive adjusted closing prices.</p>
+          <label class="file-label">Choose CSV file<input id="csv-file" type="file" accept=".csv,text/csv"></label>
+        </details>
+
+        <p class="source-note">Historical adjusted-close data source: <a href="https://finance.yahoo.com/quote/BE/history/" target="_blank" rel="noreferrer">Yahoo Finance – BE</a> and <a href="https://finance.yahoo.com/quote/SPY/history/" target="_blank" rel="noreferrer">Yahoo Finance – SPY</a>. This educational website does not provide investment advice.</p>
+      </section>
+
+      <section class="panel content-panel" data-panel="contact" hidden>
+        <p class="eyebrow">CONTACT</p>
+        <h1>Contact</h1>
+        <div class="contact-card">
+          <div class="brand-mark large">JC</div>
+          <div><h2>James Coward</h2><p>Business Entrepreneurship Student<br>Rogers State University</p><p class="contact-email"><a href="mailto:sdjamescoward@student.rsu.edu">sdjamescoward@student.rsu.edu</a></p></div>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>© 2026 James Coward</span><span>Educational use only</span></footer>
+  </body>
+</html>
