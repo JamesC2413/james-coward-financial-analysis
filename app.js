@@ -55,7 +55,7 @@ function setStatus(message, type = "info") {
 
 async function loadDefaultData() {
   try {
-    const response = await fetch("data/market-data.csv", { cache: "no-store" });
+    const response = await fetch("market-data.csv", { cache: "no-store" });
     if (!response.ok) throw new Error(`Data request failed (${response.status}).`);
     state.rows = parseCsv(await response.text());
     const first = state.rows[0].date.toISOString().slice(0, 10);
