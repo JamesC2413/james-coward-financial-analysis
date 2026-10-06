@@ -29,3 +29,4 @@ node tests/calculations.test.js
 ## Publish with GitHub Pages
 
 Upload the files to a GitHub repository, open **Settings → Pages**, select **Deploy from a branch**, and publish from the root of the `main` branch.
+Financial analysis website created by James Coward.
